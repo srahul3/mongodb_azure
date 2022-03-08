@@ -26,9 +26,11 @@ jobs:
         echo "Creating $account"
         az cosmosdb create \
           --name $account \
+          --subscription ${{ secrets.AZ_SUBSCRIPTION_ID }} \
           --resource-group ${{ secrets.AZ_RESOURCE_GROUP }} \
           --kind MongoDB \
-          --default-consistency-level Eventual \          
+          --default-consistency-level Eventual \
+          --locations regionName=${{ secrets.AZ_LOCATION }}
           
         az cosmosdb database create \
           --subscription ${{ secrets.AZ_SUBSCRIPTION_ID }} \
