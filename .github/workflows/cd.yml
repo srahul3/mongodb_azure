@@ -1,0 +1,41 @@
+# Create a MongoDB API database and collection
+on: [workflow_dispatch]
+
+permissions:
+  id-token: write
+  contents: write
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    
+    - name: Create MongoDB
+      id: create-mongodb
+      run: |
+        account=srahul3_aks_mdb
+        echo "Creating $account"
+        az cosmosdb create \
+          --name $account \
+          --resource-group $resourceGroup \
+          --kind MongoDB \
+          --default-consistency-level Eventual \
+          --location ${{ }}
+          
+        az cosmosdb database create \
+          --subscription $subscription_id \
+          --resource-group $resource_group_name \
+          --name $cosmos_account_name \
+          --db-name $cosmos_db_name \
+          --throughput 400
+
+     
+    
