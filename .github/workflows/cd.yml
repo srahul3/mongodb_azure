@@ -28,8 +28,7 @@ jobs:
           --name $account \
           --resource-group ${{ secrets.AZ_RESOURCE_GROUP }} \
           --kind MongoDB \
-          --default-consistency-level Eventual \
-          --location ${{ secrets.AZ_LOCATION }}
+          --default-consistency-level Eventual \          
           
         az cosmosdb database create \
           --subscription ${{ secrets.AZ_SUBSCRIPTION_ID }} \
