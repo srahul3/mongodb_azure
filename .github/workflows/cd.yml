@@ -21,8 +21,8 @@ jobs:
     - name: Create MongoDB
       id: create-mongodb
       run: |
-        account=srahul3aksmdb
-        cosmos_account_name=voting
+        account=srahul3aksmdb        
+        cosmos_db_name=voting
         echo "Creating $account"
         az cosmosdb create \
           --name $account \
@@ -35,7 +35,7 @@ jobs:
         az cosmosdb database create \
           --subscription ${{ secrets.AZ_SUBSCRIPTION_ID }} \
           --resource-group ${{ secrets.AZ_RESOURCE_GROUP }} \
-          --name $cosmos_account_name \
+          --name $account \
           --db-name $cosmos_db_name \
           --throughput 400
 
